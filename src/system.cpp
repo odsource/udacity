@@ -20,22 +20,19 @@ You need to properly format the uptime. Refer to the comments mentioned in forma
 // TODO: Return the system's CPU
 Processor& System::Cpu() { return cpu_; }
 
-// TODO: Return a container composed of the system's processes
+// Done: Return a container composed of the system's processes
 vector<Process>& System::Processes() { 
     std::vector<int> pidList = LinuxParser::Pids();
     for (int pid: pidList) {
         std::string cmd = LinuxParser::Command(pid);
-        std::string ram = LinuxParser::Ram(pid);
-        std::string uid = LinuxParser::Uid(pid);
         std::string usr = LinuxParser::User(pid);
-        long int upTime = LinuxParser::UpTime(pid);
         Process p(pid, usr, cmd);
         processes_.push_back(p);
     }
     return processes_;
 }
 
-// TODO: Return the system's kernel identifier (string)
+// Done: Return the system's kernel identifier (string)
 std::string System::Kernel() { 
     if (kernel_.empty()) {
         kernel_ = LinuxParser::Kernel();
@@ -43,12 +40,12 @@ std::string System::Kernel() {
     return kernel_; 
 }
 
-// TODO: Return the system's memory utilization
+// Done: Return the system's memory utilization
 float System::MemoryUtilization() { 
     return LinuxParser::MemoryUtilization();
 }
 
-// TODO: Return the operating system name
+// Done: Return the operating system name
 std::string System::OperatingSystem() { 
     if (os_.empty()) {
         os_ = LinuxParser::OperatingSystem();
@@ -56,17 +53,17 @@ std::string System::OperatingSystem() {
     return os_; 
 }
 
-// TODO: Return the number of processes actively running on the system
+// Done: Return the number of processes actively running on the system
 int System::RunningProcesses() { 
     return LinuxParser::RunningProcesses();
 }
 
-// TODO: Return the total number of processes on the system
+// Done: Return the total number of processes on the system
 int System::TotalProcesses() { 
     return LinuxParser::TotalProcesses();
 }
 
-// TODO: Return the number of seconds since the system started running
+// Done: Return the number of seconds since the system started running
 long int System::UpTime() { 
     return LinuxParser::UpTime(); 
 }
